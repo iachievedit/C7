@@ -12,6 +12,29 @@ public enum JSON {
     case null
 }
 
+extension JSON.Number: Equatable { }
+public func ==(lhs: JSON.Number, rhs: JSON.Number) -> Bool {
+    switch (lhs, rhs) {
+    case (.integer(let l), .integer(let r)): return l == r
+    case (.unsignedInteger(let l), .unsignedInteger(let r)): return l == r
+    case (.double(let l), .double(let r)): return l == r
+    default: return false
+    }
+}
+
+extension JSON: Equatable { }
+public func ==(lhs: JSON, rhs: JSON) -> Bool {
+    switch (lhs, rhs) {
+    case (.null, .null): return true
+    case (.boolean(let l), .boolean(let r)): return l == r
+    case (.string(let l), .string(let r)): return l == r
+    case (.number(let l), .number(let r)): return l == r
+    case (.array(let l), .array(let r)): return l == r
+    case (.object(let l), .object(let r)): return l == r
+    default: return false
+    }
+}
+
 //
 // TODO: refactor with
 // https://github.com/apple/swift-evolution/blob/master/proposals/0080-failable-numeric-initializers.md
