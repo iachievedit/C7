@@ -13,7 +13,7 @@ public final class Drain: DataRepresentable, Stream {
         self.init(for: [])
     }
 
-    public init(for stream: Stream, timingOut deadline: Double = .never) {
+    public init(for stream: ReceivingStream, timingOut deadline: Double = .never) {
         var buffer: Data = []
 
         if stream.closed {
