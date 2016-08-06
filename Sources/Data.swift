@@ -180,7 +180,7 @@ extension String: DataConvertible {
                 }
             }
 
-            self.init(string)
+            self.init(string)!
         }
     #else
         public init(data: Data) throws {
@@ -207,11 +207,11 @@ extension String: DataConvertible {
 }
 
 extension Data {
-    public func withUnsafeBufferPointer<R>(body: @noescape (UnsafeBufferPointer<Byte>) throws -> R) rethrows -> R {
+    public func withUnsafeBufferPointer<R>(body: (UnsafeBufferPointer<Byte>) throws -> R) rethrows -> R {
         return try bytes.withUnsafeBufferPointer(body)
     }
 
-    public mutating func withUnsafeMutableBufferPointer<R>(body: @noescape (inout UnsafeMutableBufferPointer<Byte>) throws -> R) rethrows -> R {
+    public mutating func withUnsafeMutableBufferPointer<R>(body: (inout UnsafeMutableBufferPointer<Byte>) throws -> R) rethrows -> R {
        return try bytes.withUnsafeMutableBufferPointer(body)
     }
 

@@ -13,7 +13,7 @@ public final class AsyncDrain: DataRepresentable, AsyncStream {
         self.init(for: [])
     }
     
-    public init(for stream: AsyncReceivingStream, timingOut deadline: Double = .never, completion: ((Void) throws -> AsyncDrain) -> Void) {
+    public init(for stream: AsyncReceivingStream, timingOut deadline: Double = .never, completion: @escaping ((Void) throws -> AsyncDrain) -> Void) {
         var buffer: Data = []
         
         if stream.closed {
